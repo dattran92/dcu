@@ -24,7 +24,7 @@ program.command('create-component')
     fs.mkdirSync(basePath);
 
     // index.js
-    const indexContent = `import { default } from './${name}'`;
+    const indexContent = `export { default } from './${name}'`;
     fs.writeFileSync(path.join(basePath, 'index.js'), indexContent, 'utf8');
 
     // <name>.js
