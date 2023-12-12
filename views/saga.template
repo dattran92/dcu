@@ -1,0 +1,5 @@
+import { spawn, takeEvery, take, put, select } from 'redux-saga/effects'
+
+export default function* {{name}}Saga() {
+
+}

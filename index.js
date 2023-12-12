@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const pkg = require('./package.json');
 const render = require('./utils/render');
-const { snakecase } = require('stringcase');
+const { snakecase, uppercase, camelcase } = require('stringcase');
 
 const program = new Command();
 
@@ -48,7 +48,67 @@ program.command('create-component')
     }
   });
 
+program.command('create-redux')
+  .argument('<name>', 'module Name')
+  .option('-p, --path [path]', 'Path to redux', 'src/redux')
+  .option('--actions-path [actionsPath]', 'Path to actions', 'actions')
+  .option('--constants-path [constantsPath]', 'Path to constants', 'constants')
+  .option('--reducers-path [reducersPath]', 'Path to reducers', 'reducers')
+  .option('--sagas-path [sagasPath]', 'Path to sagas', 'sagas')
+  .option('--selectors-path [selectorsPath]', 'Path to selectors', 'selectors')
+  .action((name, options) => {
+    const constantsPath = path.join(options.path, options.constantsPath);
+    const actionsPath = path.join(options.path, options.actionsPath);
+    const reducersPath = path.join(options.path, options.reducersPath);
+    const sagasPath = path.join(options.path, options.sagasPath);
+    const selectorsPath = path.join(options.path, options.selectorsPath);
 
+    const uppercaseName = uppercase(snakecase(name));
+
+    // constants/{name}.constants.js
+    const constantContent = `export const ${uppercaseName}_ACTION = '${uppercaseName}_ACTION'`;
+    fs.writeFileSync(
+      path.join(constantsPath, `${name}.constants.js`), 
+      constantContent, 
+      'utf8',
+    );
+
+    // reducers/{name}.reducer.js
+    const reducerContent = render('reducer', {
+      name,
+      uppercase_name: uppercaseName,
+    });
+    fs.writeFileSync(
+      path.join(reducersPath, `${name}.reducer.js`),
+      reducerContent, 
+      'utf8',
+    );
+
+    // selectors/{name}.selectors.js
+    const selectorName = camelcase(`get_${name}`);
+    const selectorContent = `export const ${selectorName} = state.${name}`;
+    fs.writeFileSync(
+      path.join(selectorsPath, `${name}.selectors.js`),
+      selectorContent, 
+      'utf8',
+    );
+
+    // actions/{name}.actions.js
+    const actionContent = '';
+    fs.writeFileSync(
+      path.join(actionsPath, `${name}.actions.js`),
+      actionContent, 
+      'utf8',
+    );
+
+    // sagas/{name}.saga.js}
+    const sagaContent = render('saga', { name });
+    fs.writeFileSync(
+      path.join(sagasPath, `${name}.saga.js`), 
+      sagaContent, 
+      'utf8'
+    );
+  });
 
 
 program.parse();

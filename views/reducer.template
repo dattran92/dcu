@@ -1,0 +1,23 @@
+import {
+  {{uppercase_name}}_ACTION,
+} from 'redux/constants/{{name}}.constants'
+
+const defaultState = {
+}
+
+function {{name}}Reducer(state = defaultState, action) {
+  const { type, payload } = action
+  switch (type) {
+    case {{uppercase_name}}_ACTION: {
+      return {
+        ...state,
+        ...payload,
+      }
+    }
+
+    default:
+      return state
+  }
+}
+
+export default {{name}}Reducer
