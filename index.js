@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 const { Command } = require('commander');
 const fs = require('fs');
 const path = require('path');
@@ -30,5 +32,8 @@ program.command('create-component')
       fs.writeFileSync(path.join(name, `${name}.module.scss`), '', 'utf8');
     }
   });
+
+
+
 
 program.parse();
