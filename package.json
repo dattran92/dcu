@@ -1,6 +1,6 @@
 {
   "name": "dcu",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Just my daily use commands",
   "main": "index.js",
   "bin": "./index.js",
