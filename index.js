@@ -24,7 +24,7 @@ program.command('create-component')
     fs.mkdirSync(basePath);
 
     // index.js
-    const indexContent = `export { default } from './${name}'`;
+    const indexContent = `export { default } from './${name}'\n`;
     fs.writeFileSync(path.join(basePath, 'index.js'), indexContent, 'utf8');
 
     // <name>.js
@@ -66,7 +66,7 @@ program.command('create-redux')
     const uppercaseName = uppercase(snakecase(name));
 
     // constants/{name}.constants.js
-    const constantContent = `export const ${uppercaseName}_ACTION = '${uppercaseName}_ACTION'`;
+    const constantContent = `export const ${uppercaseName}_ACTION = '${uppercaseName}_ACTION'\n`;
     fs.writeFileSync(
       path.join(constantsPath, `${name}.constants.js`), 
       constantContent, 
@@ -86,7 +86,7 @@ program.command('create-redux')
 
     // selectors/{name}.selectors.js
     const selectorName = camelcase(`get_${name}`);
-    const selectorContent = `export const ${selectorName} = state.${name}`;
+    const selectorContent = `export const ${selectorName} = state.${name}\n`;
     fs.writeFileSync(
       path.join(selectorsPath, `${name}.selectors.js`),
       selectorContent, 
