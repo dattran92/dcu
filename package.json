@@ -1,6 +1,6 @@
 {
   "name": "dcu",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Just my daily use commands",
   "main": "index.js",
   "bin": "./index.js",
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/dattran92/dcu#readme",
   "dependencies": {
     "commander": "^11.1.0",
-    "mustache": "^4.2.0"
+    "mustache": "^4.2.0",
+    "stringcase": "^4.3.1"
   }
 }
