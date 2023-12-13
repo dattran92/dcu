@@ -89,7 +89,7 @@ program.command('create-redux')
 
     // selectors/{name}.selectors.js
     const selectorName = camelcase(`get_${name}`);
-    const selectorContent = `export const ${selectorName} = state.${name}\n`;
+    const selectorContent = `export const ${selectorName} = (state) => state.${name}\n`;
     fs.writeFileSync(
       path.join(selectorsPath, `${name}.selectors.js`),
       selectorContent, 
