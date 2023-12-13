@@ -1,6 +1,17 @@
 import React from 'react'
+{{#has_locale}}
+import { useTranslation } from 'react-i18next'
+{{/has_locale}}
+{{#has_css}}
+
+import styles from './{{name}}.module.scss'
+{{/has_css}}
 
 function {{name}}() {
+  {{#has_locale}}
+  const { t } = useTranslation()
+
+  {{/has_locale}}
   return (
     <>{{name}}</>
   )

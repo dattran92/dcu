@@ -28,7 +28,10 @@ program.command('create-component')
     fs.writeFileSync(path.join(basePath, 'index.js'), indexContent, 'utf8');
 
     // <name>.js
-    const componentContent = render('CreateComponent', { name });
+    const componentContent = render(
+      'CreateComponent', 
+      { name, has_locale: options.locale, has_css: options.css },
+    );
     fs.writeFileSync(path.join(basePath, `${name}.js`), componentContent, 'utf8');
 
     // <name>.module.scss
